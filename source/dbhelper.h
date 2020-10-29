@@ -13,11 +13,11 @@ private:
 public:
 	static double delta;
 
-	static void begin();
-	static void end();
+	static void begin() noexcept;
+	static void end() noexcept;
 
 	template<typename T, typename... TArgs>
-	static T check_exectime(T(*func)(TArgs... MArgs), TArgs... MArgs)
+	static T check_exectime(T(*func)(TArgs... MArgs), TArgs... MArgs) noexcept
 	{
 		fprintf (stderr, "[DBHelper]: Function with address %p begins\n", func);
 		std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
@@ -26,7 +26,7 @@ public:
 		return buf;
 	}
 	template<typename... TArgs>
-	static void check_exectime(void(*func)(TArgs... MArgs), TArgs... MArgs)
+	static void check_exectime(void(*func)(TArgs... MArgs), TArgs... MArgs) noexcept
 	{
 		fprintf (stderr, "[DBHelper]: Function with address %p begins\n", func);
 		std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
