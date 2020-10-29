@@ -8,6 +8,8 @@
 
 class DBHelper
 {
+private:
+	static std::chrono::system_clock::time_point st;
 public:
 	static double delta;
 
