@@ -1,3 +1,4 @@
+#include "dbhelper.h"
 
 
 void cycle(int max)
@@ -11,6 +12,7 @@ void cycle(int max)
 
 int main()
 {
+	DBHelper::check_exectime(cycle,1000000000);
 	return 0;
 }
 
