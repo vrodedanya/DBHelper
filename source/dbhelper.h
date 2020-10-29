@@ -4,7 +4,7 @@
 #pragma once
 
 #include <chrono>
-#include <iostream>
+#include <stdio.h>
 
 class DBHelper
 {
@@ -14,14 +14,24 @@ public:
 	static void begin();
 	static void end();
 
+	template<typename T, typename... TArgs>
+	static T check_exectime(T(*func)(TArgs... MArgs), TArgs... MArgs)
+	{
+		fprintf (stderr, "[DBHelper]: Function with address %p begins\n", func);
+		std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
+		T buf = func(MArgs...);
+		fprintf(stderr, "[DBHelper]: Function with address %p ends with duration: %f\n", func, static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count());
+		return buf;
+	}
 	template<typename... TArgs>
 	static void check_exectime(void(*func)(TArgs... MArgs), TArgs... MArgs)
 	{
-		std::cout << "[DBHelper]: Function with address " << func << " begins" << std::endl;
+		fprintf (stderr, "[DBHelper]: Function with address %p begins\n", func);
 		std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
 		func(MArgs...);
-		std::cout << "[DBHelper]: Function with address " << func << " ends with duration: " << static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count() << std::endl;
+		fprintf(stderr, "[DBHelper]: Function with address %p ends with duration: %f\n", func, static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count());
 	}
+
 };
 
 #endif
