@@ -18,23 +18,36 @@ void cyc()
 	{
 	}
 }
+class test
+{
+private:
+public:
+	void hello()
+	{
+		std::cout << "Hello world!" << std::endl;
+	}
+};
+
+class test2
+{
+private:
+public:
+	int pow(int number)
+	{
+		return number * number;
+	}
+};
 
 int main()
 {
-	DBHelper::check_exectime(cyc);
-	std::cout << DBHelper::check_exectime(cycle, 100000000) << std::endl;
+	test t;
+	test t2;
+	test2 t3;
+	DBHelper::check_exectime(&test::hello, &t);
+	DBHelper::check_exectime(&test::hello, &t2);
+	std::cout << DBHelper::check_exectime(&test2::pow, &t3, 10) << std::endl;
 
-	int i = 0 ;
-	while(i < 10)
-	{
-		DBHelper::begin();
-		std::cout << DBHelper::delta << std::endl;
-		i++;
-		for (int j = 0 ; j < 10000000 ; j ++)
-		{
-		}
-		DBHelper::end();
-	}
+
 	return 0;
 }
 
