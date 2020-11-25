@@ -10,6 +10,8 @@ class DBHelper
 {
 private:
 	static std::chrono::system_clock::time_point st;
+	DBHelper();
+	DBHelper(const DBHelper&);
 public:
 	static double delta;
 
