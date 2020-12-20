@@ -10,9 +10,10 @@ class DBHelper
 {
 private:
 	static std::chrono::system_clock::time_point st;
-	DBHelper();
-	DBHelper(const DBHelper&);
 public:
+	DBHelper() = delete;
+	DBHelper(const DBHelper&) = delete;
+
 	static double delta;
 
 	static void begin() noexcept;
